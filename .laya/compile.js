@@ -9,6 +9,8 @@ const gulp = require(ideModuleDir + "gulp");
 const rollup = require(ideModuleDir + "rollup");
 const typescript = require(ideModuleDir + 'rollup-plugin-typescript2');//typescript2 plugin
 const glsl = require(ideModuleDir + 'rollup-plugin-glsl');
+const resolve = require('rollup-plugin-node-resolve');
+const commonjs = require('rollup-plugin-commonjs');
 
 // 如果是发布时调用编译功能，增加prevTasks
 let prevTasks = "";
@@ -32,21 +34,22 @@ gulp.task("compile", prevTasks, function () {
 		plugins: [
 			typescript({
 				check: false, //Set to false to avoid doing any diagnostic checks on the code
-				tsconfigOverride:{compilerOptions:{removeComments: true}}
+				include: /.*(.ts)$/,
+				tsconfigOverride: { compilerOptions: { removeComments: true } }
 			}),
 			glsl({
 				// By default, everything gets included
 				include: /.*(.glsl|.vs|.fs)$/,
 				sourceMap: false,
-				compress:false
+				compress: false
 			}),
-			/*terser({
-				output: {
-				},
-				numWorkers:1,//Amount of workers to spawn. Defaults to the number of CPUs minus 1
-				sourcemap: false
-			})*/        
-		]
+			resolve(),
+			commonjs(),
+		],
+		onwarn: function (warning) {
+			if (warning.code === 'THIS_IS_UNDEFINED') { return; }
+			console.warn(warning.message);
+		}
 	}).then(bundle => {
 		return bundle.write({
 			file: workSpaceDir + '/bin/js/bundle.js',

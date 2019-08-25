@@ -1,0 +1,29 @@
+{
+  "name": "layalovenodemodules",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "layalovenodemodules": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daichangxin/laya-love-node_modules.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daichangxin/laya-love-node_modules/issues"
+  },
+  "homepage": "https://github.com/daichangxin/laya-love-node_modules#readme",
+  "dependencies": {
+    "moment": "^2.24.0"
+  },
+  "devDependencies": {
+    "rollup-plugin-commonjs": "^10.0.2",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  }
+}
