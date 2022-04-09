@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/daichangxin/laya-love-node_modules#readme",
   "dependencies": {
-    "moment": "^2.24.0"
+    "moment": "^2.29.2"
   },
   "devDependencies": {
     "rollup-plugin-commonjs": "^10.0.2",
